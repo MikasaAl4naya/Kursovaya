@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Models" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="Title" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Dean_FN" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Group_2">
+    <Key>
+      <PropertyRef Name="Cipher" />
+    </Key>
+    <Property Name="Cipher" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Specialty_Title" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Year_of_receipt" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Specialty">
+    <Key>
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="Title" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Faculty_Title" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Cipher" Type="varchar" MaxLength="15" />
+    <Property Name="Qualification" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="RecordBook" />
+    </Key>
+    <Property Name="RecordBook" Type="int" Nullable="false" />
+    <Property Name="Group_2_Cipher" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="FatherSalary" Type="int" />
+    <Property Name="MotherSalary" Type="int" />
+    <Property Name="FullName" Type="varchar" MaxLength="35" />
+    <Property Name="Family" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK__Group_2__Special__286302EC">
+    <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="Title" />
+      </Principal>
+      <Dependent Role="Group_2">
+        <PropertyRef Name="Specialty_Title" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Specialty__Facul__25869641">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+    <End Role="Specialty" Type="Self.Specialty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="Title" />
+      </Principal>
+      <Dependent Role="Specialty">
+        <PropertyRef Name="Faculty_Title" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Group_2__2B3F6F97">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="Cipher" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Group_2_Cipher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="addFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+    <Parameter Name="Dean_FN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+    <Parameter Name="Specialty_Title" Type="varchar" Mode="In" />
+    <Parameter Name="Year_of_receipt" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="addSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+    <Parameter Name="Faculty_Title" Type="varchar" Mode="In" />
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+    <Parameter Name="Qualification" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="addStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RecordBook" Type="int" Mode="In" />
+    <Parameter Name="GroupCipher" Type="varchar" Mode="In" />
+    <Parameter Name="FatherSalary" Type="int" Mode="In" />
+    <Parameter Name="MotherSalary" Type="int" Mode="In" />
+    <Parameter Name="FullName" Type="varchar" Mode="In" />
+    <Parameter Name="Family" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="createAbb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="s" Type="varchar" Mode="In" />
+    <Parameter Name="a" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DeleteStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RecordBook" Type="int" Mode="In" />
+  </Function>
+  <Function Name="FIRST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Number" Type="int" Mode="In" />
+    <Parameter Name="group" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SeconD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SeconD2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="SelectFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SelectStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RecordBook" Type="int" Mode="In" />
+  </Function>
+  <Function Name="updateFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+    <Parameter Name="NewTitle" Type="varchar" Mode="In" />
+    <Parameter Name="Dean_FN" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Specialty_Title" Type="varchar" Mode="In" />
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+    <Parameter Name="Year_of_receipt" Type="smallint" Mode="In" />
+    <Parameter Name="NewCipher" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Title" Type="varchar" Mode="In" />
+    <Parameter Name="Faculty_Title" Type="varchar" Mode="In" />
+    <Parameter Name="Cipher" Type="varchar" Mode="In" />
+    <Parameter Name="Qualification" Type="varchar" Mode="In" />
+    <Parameter Name="NewTitle" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RecordBook" Type="int" Mode="In" />
+    <Parameter Name="GroupCipher" Type="varchar" Mode="In" />
+    <Parameter Name="FatherSalary" Type="int" Mode="In" />
+    <Parameter Name="MotherSalary" Type="int" Mode="In" />
+    <Parameter Name="FullName" Type="varchar" Mode="In" />
+    <Parameter Name="Family" Type="tinyint" Mode="In" />
+    <Parameter Name="NewRecordBook" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище ModelsContainer">
+    <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_2" EntityType="Self.Group_2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Group_2__Special__286302EC" Association="Self.FK__Group_2__Special__286302EC">
+      <End Role="Specialty" EntitySet="Specialty" />
+      <End Role="Group_2" EntitySet="Group_2" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Specialty__Facul__25869641" Association="Self.FK__Specialty__Facul__25869641">
+      <End Role="Faculty" EntitySet="Faculty" />
+      <End Role="Specialty" EntitySet="Specialty" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Group_2__2B3F6F97" Association="Self.FK__Student__Group_2__2B3F6F97">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

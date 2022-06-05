@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelsContainer" CdmEntityContainer="OlegEntities">
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="Models.Faculty">
+        <MappingFragment StoreEntitySet="Faculty">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_2">
+      <EntityTypeMapping TypeName="Models.Group_2">
+        <MappingFragment StoreEntitySet="Group_2">
+          <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+          <ScalarProperty Name="Specialty_Title" ColumnName="Specialty_Title" />
+          <ScalarProperty Name="Year_of_receipt" ColumnName="Year_of_receipt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialties">
+      <EntityTypeMapping TypeName="Models.Specialty">
+        <MappingFragment StoreEntitySet="Specialty">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+          <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="Models.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+          <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="addFaculty" FunctionName="Хранилище Models.addFaculty" />
+    <FunctionImportMapping FunctionImportName="addGroup" FunctionName="Хранилище Models.addGroup" />
+    <FunctionImportMapping FunctionImportName="addSpeciality" FunctionName="Хранилище Models.addSpeciality" />
+    <FunctionImportMapping FunctionImportName="addStudent" FunctionName="Хранилище Models.addStudent" />
+    <FunctionImportMapping FunctionImportName="createAbb" FunctionName="Хранилище Models.createAbb" />
+    <FunctionImportMapping FunctionImportName="DeleteFaculty" FunctionName="Хранилище Models.DeleteFaculty" />
+    <FunctionImportMapping FunctionImportName="DeleteGroup" FunctionName="Хранилище Models.DeleteGroup" />
+    <FunctionImportMapping FunctionImportName="DeleteSpeciality" FunctionName="Хранилище Models.DeleteSpeciality" />
+    <FunctionImportMapping FunctionImportName="DeleteStudent" FunctionName="Хранилище Models.DeleteStudent" />
+    <FunctionImportMapping FunctionImportName="FIRST" FunctionName="Хранилище Models.FIRST">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.FIRST_Result">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SeconD2" FunctionName="Хранилище Models.SeconD2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SeconD2_Result">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="Column1" ColumnName="Column1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectFaculty" FunctionName="Хранилище Models.SelectFaculty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SelectFaculty_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectGroup" FunctionName="Хранилище Models.SelectGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SelectGroup_Result">
+          <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+          <ScalarProperty Name="Specialty_Title" ColumnName="Specialty_Title" />
+          <ScalarProperty Name="Year_of_receipt" ColumnName="Year_of_receipt" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectSpecialty" FunctionName="Хранилище Models.SelectSpecialty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SelectSpecialty_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+          <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectStudent" FunctionName="Хранилище Models.SelectStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SelectStudent_Result">
+          <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+          <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="updateFaculty" FunctionName="Хранилище Models.updateFaculty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.updateFaculty_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="updateGroup" FunctionName="Хранилище Models.updateGroup" />
+    <FunctionImportMapping FunctionImportName="updateSpecialty" FunctionName="Хранилище Models.updateSpecialty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.updateSpecialty_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+          <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="updateStudent" FunctionName="Хранилище Models.updateStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.updateStudent_Result">
+          <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+          <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Family" ColumnName="Family" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SeconD" FunctionName="Хранилище Models.SeconD">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.SeconD_Result">
+          <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+          <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+          <ScalarProperty Name="summary" ColumnName="summary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

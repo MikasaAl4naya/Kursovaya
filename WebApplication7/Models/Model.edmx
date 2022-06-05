@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Models" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Dean_FN" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Group_2">
+          <Key>
+            <PropertyRef Name="Cipher" />
+          </Key>
+          <Property Name="Cipher" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Specialty_Title" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Year_of_receipt" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Faculty_Title" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Cipher" Type="varchar" MaxLength="15" />
+          <Property Name="Qualification" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="RecordBook" />
+          </Key>
+          <Property Name="RecordBook" Type="int" Nullable="false" />
+          <Property Name="Group_2_Cipher" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FatherSalary" Type="int" />
+          <Property Name="MotherSalary" Type="int" />
+          <Property Name="FullName" Type="varchar" MaxLength="35" />
+          <Property Name="Family" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK__Group_2__Special__286302EC">
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+          <End Role="Group_2" Type="Self.Group_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialty">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Group_2">
+              <PropertyRef Name="Specialty_Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Specialty__Facul__25869641">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Specialty">
+              <PropertyRef Name="Faculty_Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Group_2__2B3F6F97">
+          <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_2">
+              <PropertyRef Name="Cipher" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Group_2_Cipher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Dean_FN" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="addGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+          <Parameter Name="Specialty_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Year_of_receipt" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="addSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Faculty_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+          <Parameter Name="Qualification" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="addStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecordBook" Type="int" Mode="In" />
+          <Parameter Name="GroupCipher" Type="varchar" Mode="In" />
+          <Parameter Name="FatherSalary" Type="int" Mode="In" />
+          <Parameter Name="MotherSalary" Type="int" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Family" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="createAbb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="s" Type="varchar" Mode="In" />
+          <Parameter Name="a" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteSpeciality" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecordBook" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FIRST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Number" Type="int" Mode="In" />
+          <Parameter Name="group" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SeconD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SeconD2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Year" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="SelectFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SelectStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecordBook" Type="int" Mode="In" />
+        </Function>
+        <Function Name="updateFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="NewTitle" Type="varchar" Mode="In" />
+          <Parameter Name="Dean_FN" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Specialty_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+          <Parameter Name="Year_of_receipt" Type="smallint" Mode="In" />
+          <Parameter Name="NewCipher" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateSpecialty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Faculty_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Cipher" Type="varchar" Mode="In" />
+          <Parameter Name="Qualification" Type="varchar" Mode="In" />
+          <Parameter Name="NewTitle" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RecordBook" Type="int" Mode="In" />
+          <Parameter Name="GroupCipher" Type="varchar" Mode="In" />
+          <Parameter Name="FatherSalary" Type="int" Mode="In" />
+          <Parameter Name="MotherSalary" Type="int" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Family" Type="tinyint" Mode="In" />
+          <Parameter Name="NewRecordBook" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище ModelsContainer">
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group_2" EntityType="Self.Group_2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Group_2__Special__286302EC" Association="Self.FK__Group_2__Special__286302EC">
+            <End Role="Specialty" EntitySet="Specialty" />
+            <End Role="Group_2" EntitySet="Group_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Specialty__Facul__25869641" Association="Self.FK__Specialty__Facul__25869641">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Specialty" EntitySet="Specialty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Group_2__2B3F6F97" Association="Self.FK__Student__Group_2__2B3F6F97">
+            <End Role="Group_2" EntitySet="Group_2" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dean_FN" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Specialties" Relationship="Self.FK__Specialty__Facul__25869641" FromRole="Faculty" ToRole="Specialty" />
+        </EntityType>
+        <EntityType Name="Group_2">
+          <Key>
+            <PropertyRef Name="Cipher" />
+          </Key>
+          <Property Name="Cipher" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Specialty_Title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Year_of_receipt" Type="Int16" />
+          <NavigationProperty Name="Specialty" Relationship="Self.FK__Group_2__Special__286302EC" FromRole="Group_2" ToRole="Specialty" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__Student__Group_2__2B3F6F97" FromRole="Group_2" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Specialty">
+          <Key>
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Faculty_Title" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cipher" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Qualification" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Specialty__Facul__25869641" FromRole="Specialty" ToRole="Faculty" />
+          <NavigationProperty Name="Group_2" Relationship="Self.FK__Group_2__Special__286302EC" FromRole="Specialty" ToRole="Group_2" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="RecordBook" />
+          </Key>
+          <Property Name="RecordBook" Type="Int32" Nullable="false" />
+          <Property Name="Group_2_Cipher" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FatherSalary" Type="Int32" />
+          <Property Name="MotherSalary" Type="Int32" />
+          <Property Name="FullName" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Family" Type="Byte" />
+          <NavigationProperty Name="Group_2" Relationship="Self.FK__Student__Group_2__2B3F6F97" FromRole="Student" ToRole="Group_2" />
+        </EntityType>
+        <Association Name="FK__Specialty__Facul__25869641">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Specialty">
+              <PropertyRef Name="Faculty_Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Group_2__Special__286302EC">
+          <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+          <End Role="Group_2" Type="Self.Group_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialty">
+              <PropertyRef Name="Title" />
+            </Principal>
+            <Dependent Role="Group_2">
+              <PropertyRef Name="Specialty_Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Group_2__2B3F6F97">
+          <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group_2">
+              <PropertyRef Name="Cipher" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Group_2_Cipher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OlegEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Group_2" EntityType="Self.Group_2" />
+          <EntitySet Name="Specialties" EntityType="Self.Specialty" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK__Specialty__Facul__25869641" Association="Self.FK__Specialty__Facul__25869641">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Specialty" EntitySet="Specialties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Group_2__Special__286302EC" Association="Self.FK__Group_2__Special__286302EC">
+            <End Role="Specialty" EntitySet="Specialties" />
+            <End Role="Group_2" EntitySet="Group_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Group_2__2B3F6F97" Association="Self.FK__Student__Group_2__2B3F6F97">
+            <End Role="Group_2" EntitySet="Group_2" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <FunctionImport Name="addFaculty">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Dean_FN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addGroup">
+            <Parameter Name="Cipher" Mode="In" Type="String" />
+            <Parameter Name="Specialty_Title" Mode="In" Type="String" />
+            <Parameter Name="Year_of_receipt" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="addSpeciality">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Faculty_Title" Mode="In" Type="String" />
+            <Parameter Name="Cipher" Mode="In" Type="String" />
+            <Parameter Name="Qualification" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="addStudent">
+            <Parameter Name="RecordBook" Mode="In" Type="Int32" />
+            <Parameter Name="GroupCipher" Mode="In" Type="String" />
+            <Parameter Name="FatherSalary" Mode="In" Type="Int32" />
+            <Parameter Name="MotherSalary" Mode="In" Type="Int32" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Family" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="createAbb">
+            <Parameter Name="s" Mode="In" Type="String" />
+            <Parameter Name="a" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteFaculty">
+          <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteGroup">
+          <Parameter Name="Cipher" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSpeciality">
+          <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteStudent">
+          <Parameter Name="RecordBook" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FIRST" ReturnType="Collection(Models.FIRST_Result)">
+            <Parameter Name="Number" Mode="In" Type="Int32" />
+            <Parameter Name="group" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SeconD2" ReturnType="Collection(Models.SeconD2_Result)">
+          <Parameter Name="Year" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="SelectFaculty" ReturnType="Collection(Models.SelectFaculty_Result)">
+          <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectGroup" ReturnType="Collection(Models.SelectGroup_Result)">
+          <Parameter Name="Cipher" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectSpecialty" ReturnType="Collection(Models.SelectSpecialty_Result)">
+          <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SelectStudent" ReturnType="Collection(Models.SelectStudent_Result)">
+          <Parameter Name="RecordBook" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="updateFaculty" ReturnType="Collection(Models.updateFaculty_Result)">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="NewTitle" Mode="In" Type="String" />
+            <Parameter Name="Dean_FN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateGroup">
+            <Parameter Name="Specialty_Title" Mode="In" Type="String" />
+            <Parameter Name="Cipher" Mode="In" Type="String" />
+            <Parameter Name="Year_of_receipt" Mode="In" Type="Int16" />
+            <Parameter Name="NewCipher" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateSpecialty" ReturnType="Collection(Models.updateSpecialty_Result)">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Faculty_Title" Mode="In" Type="String" />
+            <Parameter Name="Cipher" Mode="In" Type="String" />
+            <Parameter Name="Qualification" Mode="In" Type="String" />
+            <Parameter Name="NewTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateStudent" ReturnType="Collection(Models.updateStudent_Result)">
+            <Parameter Name="RecordBook" Mode="In" Type="Int32" />
+            <Parameter Name="GroupCipher" Mode="In" Type="String" />
+            <Parameter Name="FatherSalary" Mode="In" Type="Int32" />
+            <Parameter Name="MotherSalary" Mode="In" Type="Int32" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Family" Mode="In" Type="Byte" />
+            <Parameter Name="NewRecordBook" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SeconD" ReturnType="Collection(Models.SeconD_Result)" />
+        </EntityContainer>
+        <ComplexType Name="FIRST_Result">
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="Group_2_Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="avgSalary" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SeconD2_Result">
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="Group_2_Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectFaculty_Result">
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Dean_FN" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="SelectGroup_Result">
+          <Property Type="String" Name="Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Specialty_Title" Nullable="false" MaxLength="60" />
+          <Property Type="Int16" Name="Year_of_receipt" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectSpecialty_Result">
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Faculty_Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Cipher" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Qualification" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="SelectStudent_Result">
+          <Property Type="Int32" Name="RecordBook" Nullable="false" />
+          <Property Type="String" Name="Group_2_Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="FatherSalary" Nullable="true" />
+          <Property Type="Int32" Name="MotherSalary" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="35" />
+          <Property Type="Byte" Name="Family" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="updateFaculty_Result">
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Dean_FN" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="updateSpecialty_Result">
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Faculty_Title" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Cipher" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Qualification" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="updateStudent_Result">
+          <Property Type="Int32" Name="RecordBook" Nullable="false" />
+          <Property Type="String" Name="Group_2_Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="FatherSalary" Nullable="true" />
+          <Property Type="Int32" Name="MotherSalary" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="35" />
+          <Property Type="Byte" Name="Family" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SeconD_Result">
+          <Property Type="Int32" Name="RecordBook" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="35" />
+          <Property Type="Int32" Name="avgSalary" Nullable="true" />
+          <Property Type="String" Name="Group_2_Cipher" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="summary" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelsContainer" CdmEntityContainer="OlegEntities">
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="Models.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group_2">
+            <EntityTypeMapping TypeName="Models.Group_2">
+              <MappingFragment StoreEntitySet="Group_2">
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Specialty_Title" ColumnName="Specialty_Title" />
+                <ScalarProperty Name="Year_of_receipt" ColumnName="Year_of_receipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialties">
+            <EntityTypeMapping TypeName="Models.Specialty">
+              <MappingFragment StoreEntitySet="Specialty">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="Models.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+                <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addFaculty" FunctionName="Хранилище Models.addFaculty" />
+          <FunctionImportMapping FunctionImportName="addGroup" FunctionName="Хранилище Models.addGroup" />
+          <FunctionImportMapping FunctionImportName="addSpeciality" FunctionName="Хранилище Models.addSpeciality" />
+          <FunctionImportMapping FunctionImportName="addStudent" FunctionName="Хранилище Models.addStudent" />
+          <FunctionImportMapping FunctionImportName="createAbb" FunctionName="Хранилище Models.createAbb" />
+          <FunctionImportMapping FunctionImportName="DeleteFaculty" FunctionName="Хранилище Models.DeleteFaculty" />
+          <FunctionImportMapping FunctionImportName="DeleteGroup" FunctionName="Хранилище Models.DeleteGroup" />
+          <FunctionImportMapping FunctionImportName="DeleteSpeciality" FunctionName="Хранилище Models.DeleteSpeciality" />
+          <FunctionImportMapping FunctionImportName="DeleteStudent" FunctionName="Хранилище Models.DeleteStudent" />
+          <FunctionImportMapping FunctionImportName="FIRST" FunctionName="Хранилище Models.FIRST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.FIRST_Result">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SeconD2" FunctionName="Хранилище Models.SeconD2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SeconD2_Result">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectFaculty" FunctionName="Хранилище Models.SelectFaculty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SelectFaculty_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectGroup" FunctionName="Хранилище Models.SelectGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SelectGroup_Result">
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Specialty_Title" ColumnName="Specialty_Title" />
+                <ScalarProperty Name="Year_of_receipt" ColumnName="Year_of_receipt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectSpecialty" FunctionName="Хранилище Models.SelectSpecialty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SelectSpecialty_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectStudent" FunctionName="Хранилище Models.SelectStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SelectStudent_Result">
+                <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+                <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="updateFaculty" FunctionName="Хранилище Models.updateFaculty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.updateFaculty_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Dean_FN" ColumnName="Dean_FN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="updateGroup" FunctionName="Хранилище Models.updateGroup" />
+          <FunctionImportMapping FunctionImportName="updateSpecialty" FunctionName="Хранилище Models.updateSpecialty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.updateSpecialty_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Faculty_Title" ColumnName="Faculty_Title" />
+                <ScalarProperty Name="Cipher" ColumnName="Cipher" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="updateStudent" FunctionName="Хранилище Models.updateStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.updateStudent_Result">
+                <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+                <ScalarProperty Name="MotherSalary" ColumnName="MotherSalary" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SeconD" FunctionName="Хранилище Models.SeconD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.SeconD_Result">
+                <ScalarProperty Name="RecordBook" ColumnName="RecordBook" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="avgSalary" ColumnName="avgSalary" />
+                <ScalarProperty Name="Group_2_Cipher" ColumnName="Group_2_Cipher" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

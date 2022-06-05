@@ -1,0 +1,23 @@
+﻿@model WebApplication7.Models.Student
+
+@{
+    ViewBag.Title = "Список указанных студентов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="mt-4">Средняя зарплата</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group mt-3">
+        <div class="col-6">
+            @Html.TextArea("Number", "", 1, 50, null)
+        </div>
+        <h2 class="mt-4">Шифр группы</h2>
+        <div class="col-6">
+            @Html.DropDownList("Cipher", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-offset-2 col-4 mt-3">
+        <input type="submit" value="Найти" class="btn btn-primary" />
+    </div>
+}

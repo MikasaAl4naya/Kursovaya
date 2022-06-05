@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebApplication7.Models.Group_2>
+@using WebApplication7.Models;
+@{
+    ViewBag.Title = "Группы";
+
+    Pager pager = new Pager();
+    int pageNum = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNum = pager.CurrentPage;
+    }
+}
+
+<h2>Группы</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cipher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year_of_receipt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specialty.Title)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cipher)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Year_of_receipt)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Specialty.Faculty_Title)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Cipher }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Cipher }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Cipher })
+    </td>
+</tr>
+    }
+
+
+</table>
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?pg=1">Первая</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?pg=@(pager.CurrentPage - 1)">Назад</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="?pg=@pge"> @pge </a>
+                </li>
+            }
+
+            @if (pager.CurrentPage < pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?pg=@(pager.CurrentPage + 1)">Далее</a>
+                </li>
+                <li>
+                    <a class="page-link" href="?pg=@(pager.TotalPages)">Последняя</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
